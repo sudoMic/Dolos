@@ -1,0 +1,19 @@
+From: "GitHub" <noreply@github.com>
+To: user@example.com
+Subject: Your pull request was merged
+Date: Thu, 12 Jun 2026 10:00:00 +0000
+Message-ID: <clean001@github.com>
+MIME-Version: 1.0
+Content-Type: text/plain
+Received: from mail.github.com ([192.30.252.1]) by mx.example.com; Thu, 12 Jun 2026 10:00:00 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=github.com; dkim=pass header.d=github.com; dmarc=pass
+Received-SPF: pass
+
+Hi,
+
+Your pull request #42 has been merged into main.
+
+View your pull request: https://github.com/user/repo/pull/42
+
+Thanks,
+The GitHub Team

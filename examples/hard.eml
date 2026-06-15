@@ -1,0 +1,20 @@
+From: "Microsoft Account Team" <account-security-noreply@accountprotection.microsoft.com>
+To: user@example.com
+Subject: Microsoft account security info was added
+Date: Thu, 12 Jun 2026 14:32:00 +0000
+Message-ID: <sec001@accountprotection.microsoft.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Received: from mail.protection.outlook.com ([40.107.65.50]) by mx.example.com; Thu, 12 Jun 2026 14:32:00 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=accountprotection.microsoft.com; dkim=pass header.d=microsoft.com; dmarc=pass
+Received-SPF: pass
+
+<html>
+<body>
+<p>We noticed that security info was recently added to the Microsoft account user@example.com.</p>
+<p>If this was you, you can safely ignore this email.</p>
+<p>If this wasn't you, a malicious user has access to your account. Review your account activity:</p>
+<a href="https://click.protection.outlook.com/?url=http://mіcrosoft-account-verify.com/security/review&token=xK9zL2">Review recent activity</a>
+<p>The Microsoft account team</p>
+</body>
+</html>
