@@ -1,6 +1,6 @@
 # Dolos
 
-> Static analysis tool for phishing email detection. Parses `.eml` files and runs multiple detection modules to produce a scored verdict with an HTML or JSON report.
+Static analysis tool for phishing email detection. Parses `.eml` files and runs multiple detection modules to produce a scored verdict with an HTML or JSON report.
 
 ---
 
