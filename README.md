@@ -99,6 +99,8 @@ ABUSEIPDB_API_KEY=your_key_here
 
 ## Usage
 
+ATTENTION: the body analyzer performs live HTTP requests to follow redirects: run Dolos in an isolated environment when analyzing real samples.
+
 ```bash
 # Analyze a single file (CLI output)
 python3 main.py email.eml
@@ -136,7 +138,7 @@ Sender domain `paypa1-secure.com` is flagged as typosquatting of `paypal.com` (L
 
 ---
 
-### Evasion attempt — `LIKELY_MALICIOUS` · Score: 40/100
+### Evasion attempt — `MALICIOUS` · Score: 70/100
 
 Sender: `account-security-noreply@accountprotection.microsoft.com`. SPF/DKIM/DMARC all pass, IP belongs to Microsoft. No phishing keywords, no suspicious attachments.
 
@@ -165,7 +167,6 @@ dolos/
 │   └── scorer.py                # Anomaly aggregation and verdict computation
 ├── output/
 │   ├── report_html.py           # HTML report generation (Jinja2)
-│   └── report_json.py           # JSON output
 └── examples/
     ├── clean.eml                # Legitimate email sample
     ├── phishing.eml             # Standard phishing sample
