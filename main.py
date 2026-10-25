@@ -11,7 +11,7 @@ from enrichment.lookup import enrich_email
 from scoring.scorer import compute_score
 from output.report_html import generate_html_report
 
-VERSION = "1.1"
+VERSION = "1.1.1"
 
 
 def main():

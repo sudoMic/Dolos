@@ -579,7 +579,7 @@ TEMPLATE = """
 def generate_html_report(filename: str, headers: dict, header_analysis: dict,
                          body_analysis: dict, attachment_analysis: dict,
                          enrichment: dict, score_result: dict) -> str:
-    template = Template(TEMPLATE)
+    template = Template(TEMPLATE, autoescape=True)
     html = template.render(
         filename=filename,
         timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
