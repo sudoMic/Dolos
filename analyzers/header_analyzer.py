@@ -182,7 +182,9 @@ def _check_typosquatting(domain: str) -> list:
             suspicious.append({
                 "brand": brand,
                 "distance": 0,
-                "homograph": True,
+                # homograph only if lookalike characters were actually replaced,
+                # otherwise the match comes from suffix stripping (paypal-login)
+                "homograph": _normalize_homoglyphs(domain_base) != domain_base,
             })
             return suspicious
         
