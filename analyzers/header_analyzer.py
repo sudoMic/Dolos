@@ -30,6 +30,18 @@ KNOWN_BRANDS = [
 TYPOSQUATTING_THRESHOLD = 3
 
 
+def _max_distance(base: str) -> int:
+    # Short names need a stricter limit, otherwise unrelated domains
+    # match (ups.com / ibm.com -> x.com, aol.com -> dhl.com)
+    if len(base) <= 3:
+        return 0
+    if len(base) <= 5:
+        return 1
+    if len(base) <= 8:
+        return 2
+    return TYPOSQUATTING_THRESHOLD
+
+
 def analyze_headers(headers: dict) -> dict:
     """
     Analyze headers extracted by the parser and return
@@ -175,7 +187,7 @@ def _check_typosquatting(domain: str) -> list:
             return suspicious
         
         dist = levenshtein_distance(normalized, brand_base)
-        if dist <= TYPOSQUATTING_THRESHOLD and dist > 0:
+        if 0 < dist <= _max_distance(brand_base):
             suspicious.append({
                 "brand": brand,
                 "distance": dist,
@@ -272,7 +284,7 @@ def _collect_anomalies(results: dict) -> list:
 
         reply_base = reply_domain.rsplit(".", 1)[0] if "." in reply_domain else reply_domain
         from_base = from_domain.rsplit(".", 1)[0] if "." in from_domain else from_domain
-        is_lookalike = levenshtein_distance(reply_base, from_base) <= TYPOSQUATTING_THRESHOLD
+        is_lookalike = levenshtein_distance(reply_base, from_base) <= _max_distance(from_base)
 
         if is_lookalike:
             anomalies.append({
