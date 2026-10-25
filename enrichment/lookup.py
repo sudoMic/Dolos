@@ -234,18 +234,9 @@ def enrich_email(header_analysis: dict, body_analysis: dict, attachment_analysis
                 "severity": "critical",
                 "score": 60,
             })
-            
-        # Unreachable domain — suspicious signal
-        if vt_result.get("error") and "connection" in vt_result["error"].lower():
-            enrichment["anomalies"].append({
-                "type": "UNREACHABLE_URL",
-                "description": f"Unreachable URL (connection error): {final_url[:80]}",
-                "severity": "medium",
-                "score": 15,
-            })
 
     return enrichment
-
+    
 
 def _extract_sender_ip(header_analysis: dict) -> str:
     """

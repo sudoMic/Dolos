@@ -228,6 +228,15 @@ def _collect_anomalies(resolved_urls: list, keyword_results: dict) -> list:
                 "score": 25,
             })
             
+        # Unreachable URL (connection error during resolution)
+        if url_data.get("error") == "connection_error":
+            anomalies.append({
+                "type": "UNREACHABLE_URL",
+                "description": f"Unreachable URL (connection error): {url_data['original'][:80]}",
+                "severity": "medium",
+                "score": 15,
+            })
+        
         # Homograph / typosquatting check on URL domain
         final_domain = url_data.get("final_domain") or original_domain
         for check_domain in set([original_domain, final_domain]):
