@@ -514,7 +514,10 @@ TEMPLATE = """
                 <div class="pdf-block">
                     <div class="pdf-label">PDF analysis</div>
                     {% if att.pdf_analysis.has_javascript %}
-                    <div class="pdf-flag">⚠ JavaScript / OpenAction detected</div>
+                    <div class="pdf-flag">⚠ JavaScript detected</div>
+                    {% endif %}
+                    {% if att.pdf_analysis.auto_action %}
+                    <div style="color:var(--muted);font-size:0.78rem;">Automatic action on open (OpenAction/AA)</div>
                     {% endif %}
                     {% if att.pdf_analysis.embedded_urls %}
                     <div class="pdf-label" style="margin-top:6px;">Embedded URLs</div>

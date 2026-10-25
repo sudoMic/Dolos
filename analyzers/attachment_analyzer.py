@@ -202,7 +202,7 @@ def _collect_anomalies(result: dict) -> list:
     if pdf and pdf.get("has_javascript"):
         anomalies.append({
             "type": "PDF_JAVASCRIPT",
-            "description": f"PDF '{result['filename']}' contains JavaScript or automatic action",
+            "description": f"PDF '{result['filename']}' contains JavaScript",
             "severity": "critical",
             "score": 50,
         })
@@ -223,12 +223,13 @@ def _check_pdf(payload: bytes, filename: str) -> dict:
         from pdfminer.high_level import extract_text
         from pdfminer.pdfdocument import PDFDocument
         from pdfminer.pdfparser import PDFParser
-        from pdfminer.pdftypes import resolve1, PDFObjRef
+        from pdfminer.pdftypes import resolve1, PDFStream
     except ImportError:
         return {"error": "pdfminer.six not installed"}
 
     result = {
         "has_javascript": False,
+        "auto_action": False,
         "embedded_urls": [],
         "suspicious": False,
     }
@@ -238,26 +239,38 @@ def _check_pdf(payload: bytes, filename: str) -> dict:
         doc = PDFDocument(parser)
         catalog = resolve1(doc.catalog)
 
-        if "AA" in catalog or "OpenAction" in catalog:
-            result["has_javascript"] = True
-            result["suspicious"] = True
+        # OpenAction/AA alone is common in legit PDFs (initial page, zoom):
+        # recorded for the report, not scored
+        result["auto_action"] = "AA" in catalog or "OpenAction" in catalog
 
-        # Scan all PDF objects looking for JS strings
+        # Scan all PDF objects looking for JavaScript
         js_content = ""
         for xref in doc.xrefs:
             for objid in xref.get_objids():
                 try:
                     obj = resolve1(doc.getobj(objid))
-                    if isinstance(obj, dict):
-                        for key in ("JS", "JavaScript"):
-                            if key in obj:
-                                js_val = resolve1(obj[key])
-                                if isinstance(js_val, bytes):
-                                    js_content += js_val.decode(errors="ignore")
-                                elif isinstance(js_val, str):
-                                    js_content += js_val
+                    if isinstance(obj, PDFStream):
+                        obj = obj.attrs
+                    if not isinstance(obj, dict):
+                        continue
+                    # action of type /S /JavaScript
+                    if getattr(obj.get("S"), "name", None) == "JavaScript":
+                        result["has_javascript"] = True
+                    for key in ("JS", "JavaScript"):
+                        if key in obj:
+                            result["has_javascript"] = True
+                            js_val = resolve1(obj[key])
+                            # JS code can also be stored in a stream
+                            if isinstance(js_val, PDFStream):
+                                js_val = js_val.get_data()
+                            if isinstance(js_val, bytes):
+                                js_content += js_val.decode(errors="ignore")
+                            elif isinstance(js_val, str):
+                                js_content += js_val
                 except Exception:
                     continue
+
+        result["suspicious"] = result["has_javascript"]
 
         # Extract URLs from JS content
         if js_content:

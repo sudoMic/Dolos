@@ -20,6 +20,7 @@ EXPECTED = {
     "test_pdf.eml":        "MALICIOUS",
     # benign
     "newsletter.eml":      "BENIGN",
+    "invoice_pdf.eml":     "BENIGN",   # PDF with harmless OpenAction (page fit)
 }
 
 # No API calls in tests: results must not depend on keys, quotas or network

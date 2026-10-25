@@ -1,0 +1,28 @@
+From: "Billing" <billing@example.com>
+To: mic@example.com
+Subject: Invoice October 2026
+Date: Mon, 20 Oct 2026 09:00:00 +0000
+Message-ID: <invoice-1020@example.com>
+MIME-Version: 1.0
+Received: from mail.example.com ([93.184.216.34]) by mx.example.com; Mon, 20 Oct 2026 09:00:00 +0000
+Content-Type: multipart/mixed; boundary="inv-boundary"
+
+--inv-boundary
+Content-Type: text/plain; charset="utf-8"
+
+Hello, please find attached the invoice for October.
+
+--inv-boundary
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="invoice_october.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgL09wZW5BY3Rp
+b24gWzMgMCBSIC9GaXRdID4+CmVuZG9iagoyIDAgb2JqCjw8IC9UeXBlIC9QYWdlcyAvS2lkcyBb
+MyAwIFJdIC9Db3VudCAxID4+CmVuZG9iagozIDAgb2JqCjw8IC9UeXBlIC9QYWdlIC9QYXJlbnQg
+MiAwIFIgL01lZGlhQm94IFswIDAgNjEyIDc5Ml0gPj4KZW5kb2JqCnhyZWYKMCA0CjAwMDAwMDAw
+MDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDgzIDAwMDAwIG4gCjAwMDAw
+MDAxNDAgMDAwMDAgbiAKdHJhaWxlciA8PCAvU2l6ZSA0IC9Sb290IDEgMCBSID4+CnN0YXJ0eHJl
+ZgoyMTEKJSVFT0YK
+
+--inv-boundary--
