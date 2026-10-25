@@ -1,6 +1,6 @@
 # Dolos
 
-Static analysis tool for phishing email detection. Parses `.eml` files and runs multiple detection modules to produce a scored verdict with an HTML or JSON report.
+Analysis tool for phishing email detection. Parses `.eml` files and runs multiple detection modules to produce a scored verdict with an HTML or JSON report.
 
 ---
 
@@ -27,7 +27,7 @@ Each analyzer produces a list of anomalies with associated weights. The scorer a
 ### Header Analysis
 - [SPF](https://datatracker.ietf.org/doc/html/rfc7208) / [DKIM](https://datatracker.ietf.org/doc/html/rfc6376) / [DMARC](https://datatracker.ietf.org/doc/html/rfc7489) result parsing
 - Typosquatting detection via [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) with deceptive suffix stripping (`-secure`, `-login`, `-notifications`, etc.)
-- [Homograph attack](https://en.wikipedia.org/wiki/IDN_homograph_attack) detection — Cyrillic and lookalike Unicode characters via normalization
+- [Homograph attack](https://en.wikipedia.org/wiki/IDN_homograph_attack) detection — Cyrillic and lookalike Unicode characters via Cyrillic homoglyph mapping
 - Reply-To lookalike detection — flags when Reply-To domain is a typosquatted variant of the sender domain
 - Received chain parsing with private IP filtering ([RFC 1918](https://datatracker.ietf.org/doc/html/rfc1918))
 
@@ -202,6 +202,12 @@ scores:
   PDF_EMBEDDED_URLS: 20
   URL_HOMOGRAPH: 40
   URL_TYPOSQUATTING: 20
+  URL_SHORTENER: 15
+  URL_REDIRECT: 5
+  DOUBLE_EXTENSION: 30
+  HIGH_RISK_EXTENSION: 40
+  MIME_MISMATCH: 35
+  OFFICE_MACROS: 30
 ```
 
 ---
