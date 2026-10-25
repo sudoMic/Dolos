@@ -1,6 +1,5 @@
 import re
 from Levenshtein import distance as levenshtein_distance
-import unicodedata
 
 HOMOGLYPH_MAP = str.maketrans({
     'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c',
