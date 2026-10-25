@@ -32,7 +32,7 @@ Each analyzer produces a list of anomalies with associated weights. The scorer a
 - Received chain parsing with private IP filtering ([RFC 1918](https://datatracker.ietf.org/doc/html/rfc1918))
 
 ### Body Analysis
-- URL extraction from plain text and HTML, including obfuscated and hidden tags
+- URL extraction from plain text and HTML, including links in `form`, `iframe` and `script` tags
 - URL extraction from query parameters (`?url=`, `?redirect=`, `?next=`)
 - Redirect chain following
 - URL shortener detection
@@ -47,7 +47,7 @@ Each analyzer produces a list of anomalies with associated weights. The scorer a
 - High-risk extension flagging
 - MIME type vs declared extension mismatch
 - VBA macro detection in Office files ([oletools](https://github.com/decalage2/oletools))
-- PDF analysis: JavaScript / OpenAction detection, embedded URL extraction ([pdfminer.six](https://github.com/pdfminer/pdfminer.six))
+- PDF analysis: JavaScript detection (JavaScript actions, document-level scripts, JS streams) and embedded URL extraction. `OpenAction`/`AA` alone is reported but not scored, since legitimate PDFs use it to set the initial page view ([pdfminer.six](https://github.com/pdfminer/pdfminer.six))
 
 ### Enrichment _(requires API keys)_
 | Service | Lookup |
@@ -99,7 +99,7 @@ ABUSEIPDB_API_KEY=your_key_here
 
 ## Usage
 
-ATTENTION: the body analyzer performs live HTTP requests to follow redirects: run Dolos in an isolated environment when analyzing real samples.
+> **Warning:** the body analyzer performs live HTTP requests to follow redirects. Run Dolos in an isolated environment when analyzing real samples.
 
 ```bash
 # Analyze a single file (CLI output)
@@ -148,6 +148,16 @@ The link is wrapped in a Safe Links–style redirect, but the real destination i
 
 ---
 
+## Tests
+
+```bash
+python -m pytest tests/ -v
+```
+
+Verdict tests run offline (no enrichment API calls) against a synthetic corpus in `tests/corpus/`: phishing samples (typosquatting, homograph, Reply-To lookalike, malicious PDF) and benign samples, including a PDF with a harmless `OpenAction`.
+
+---
+
 ## Project Structure
 
 ```
@@ -166,7 +176,10 @@ dolos/
 ├── scoring/
 │   └── scorer.py                # Anomaly aggregation and verdict computation
 ├── output/
-│   ├── report_html.py           # HTML report generation (Jinja2)
+│   └── report_html.py           # HTML report generation (Jinja2)
+├── tests/
+│   ├── test_verdicts.py         # Offline verdict tests (pytest)
+│   └── corpus/                  # Synthetic phishing and benign samples
 └── examples/
     ├── clean.eml                # Legitimate email sample
     ├── phishing.eml             # Standard phishing sample
@@ -235,5 +248,7 @@ scores:
 | [pdfminer.six](https://github.com/pdfminer/pdfminer.six) | PDF text extraction and embedded URL analysis |
 | [jinja2](https://jinja.palletsprojects.com/) | HTML report templating |
 | [pyyaml](https://pyyaml.org/) | `weights.yaml` configuration parsing |
+| [python-dotenv](https://github.com/theskumar/python-dotenv) | Loads API keys from `.env` |
+| [pytest](https://docs.pytest.org/) | Test runner |
 
 See `requirements.txt` for pinned versions.

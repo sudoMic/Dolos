@@ -11,10 +11,12 @@ from enrichment.lookup import enrich_email
 from scoring.scorer import compute_score
 from output.report_html import generate_html_report
 
+VERSION = "1.1"
+
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Dolos v1 — Phishing Email Analyzer",
+        description=f"Dolos v{VERSION} — Phishing Email Analyzer",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 USAGE:
@@ -32,7 +34,8 @@ OUTPUT FORMATS:
 ANALYSIS MODULES:
   Header      SPF / DKIM / DMARC, Received chain, typosquatting (Levenshtein)
   Body        URL extraction, redirect chain, phishing keyword scoring
-  Attachments Magic bytes, MD5/SHA256 hashes, double extension, Office macros (oletools)
+  Attachments Magic bytes, MD5/SHA256 hashes, double extension, Office macros (oletools),
+              PDF JavaScript and embedded URLs (pdfminer.six)
   Enrichment  VirusTotal (hash + URL), AbuseIPDB (IP), URLhaus (IP)
 
 SCORING:
@@ -183,7 +186,7 @@ def _print_cli(filename, raw_headers, header_analysis, body_analysis,
     color = verdict_colors.get(score_result["verdict"], "")
 
     print(f"\n{'='*50}")
-    print(f"{BOLD}  DOLOS v1{RESET}")
+    print(f"{BOLD}  DOLOS v{VERSION}{RESET}")
     print(f"  {filename}")
     print(f"{'='*50}")
     print(f"\n  Verdict: {color}{BOLD}{score_result['verdict']}{RESET}")

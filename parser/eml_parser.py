@@ -128,7 +128,7 @@ def _extract_attachments(msg) -> list:
             disposition = str(part.get("Content-Disposition", ""))
             if "attachment" in disposition:
                 attachments.append({
-                    "filename": part.get_filename("sconosciuto"),
+                    "filename": part.get_filename("unknown"),
                     "content_type": part.get_content_type(),
                     "payload": part.get_payload(decode=True),  # raw bytes
                 })

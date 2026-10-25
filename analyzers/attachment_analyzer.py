@@ -192,7 +192,7 @@ def _collect_anomalies(result: dict) -> list:
     if macros and macros.get("has_macros"):
         anomalies.append({
             "type": "OFFICE_MACROS",
-            "description": f"VBA Macros detected: {macros.get('macro_count', 0)} moduli",
+            "description": f"VBA Macros detected: {macros.get('macro_count', 0)} modules",
             "severity": "high",
             "score": 30,
         })

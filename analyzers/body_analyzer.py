@@ -1,7 +1,6 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
 from analyzers.header_analyzer import _check_typosquatting
 from urllib.parse import urlparse, parse_qs
 
@@ -202,7 +201,6 @@ def _collect_anomalies(resolved_urls: list, keyword_results: dict) -> list:
     unreachable = set(u["original"] for u in resolved_urls if u.get("error") == "connection_error")
 
     for url_data in resolved_urls:
-        # Skip redirect if original domain is already known/trusted
         original_domain = url_data.get("domain", "")
         
         if url_data["is_shortener"]:
