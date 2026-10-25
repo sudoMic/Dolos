@@ -198,6 +198,9 @@ def _collect_anomalies(resolved_urls: list, keyword_results: dict) -> list:
     """
     anomalies = []
 
+    # URLs that could not be reached during resolution
+    unreachable = set(u["original"] for u in resolved_urls if u.get("error") == "connection_error")
+
     for url_data in resolved_urls:
         # Skip redirect if original domain is already known/trusted
         original_domain = url_data.get("domain", "")
@@ -229,13 +232,16 @@ def _collect_anomalies(resolved_urls: list, keyword_results: dict) -> list:
             })
             
         # Unreachable URL (connection error during resolution)
-        if url_data.get("error") == "connection_error":
-            anomalies.append({
-                "type": "UNREACHABLE_URL",
-                "description": f"Unreachable URL (connection error): {url_data['original'][:80]}",
-                "severity": "medium",
-                "score": 15,
-            })
+        if url_data["original"] in unreachable:
+            embedded = _extract_urls_from_params(url_data["original"])
+            # wrapper link: skip if its destination is already flagged
+            if not any(e in unreachable for e in embedded):
+                anomalies.append({
+                    "type": "UNREACHABLE_URL",
+                    "description": f"Unreachable URL (connection error): {url_data['original'][:80]}",
+                    "severity": "medium",
+                    "score": 15,
+                })
         
         # Homograph / typosquatting check on URL domain
         final_domain = url_data.get("final_domain") or original_domain

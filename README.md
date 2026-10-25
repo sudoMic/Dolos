@@ -27,7 +27,7 @@ Each analyzer produces a list of anomalies with associated weights. The scorer a
 ### Header Analysis
 - [SPF](https://datatracker.ietf.org/doc/html/rfc7208) / [DKIM](https://datatracker.ietf.org/doc/html/rfc6376) / [DMARC](https://datatracker.ietf.org/doc/html/rfc7489) result parsing
 - Typosquatting detection via [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) with deceptive suffix stripping (`-secure`, `-login`, `-notifications`, etc.)
-- [Homograph attack](https://en.wikipedia.org/wiki/IDN_homograph_attack) detection — Cyrillic and lookalike Unicode characters via Cyrillic homoglyph mapping
+- [Homograph attack](https://en.wikipedia.org/wiki/IDN_homograph_attack) detection — Cyrillic lookalike characters (e.g. `а`, `о`, `і`) mapped to their Latin equivalents before brand comparison
 - Reply-To lookalike detection — flags when Reply-To domain is a typosquatted variant of the sender domain
 - Received chain parsing with private IP filtering ([RFC 1918](https://datatracker.ietf.org/doc/html/rfc1918))
 
@@ -138,11 +138,11 @@ Sender domain `paypa1-secure.com` is flagged as typosquatting of `paypal.com` (L
 
 ---
 
-### Evasion attempt — `MALICIOUS` · Score: 70/100
+### Evasion attempt — `LIKELY_MALICIOUS` · Score: 55/100
 
 Sender: `account-security-noreply@accountprotection.microsoft.com`. SPF/DKIM/DMARC all pass, IP belongs to Microsoft. No phishing keywords, no suspicious attachments.
 
-The only signal: the link href contains `http://mіcrosoft-account-verify.com` — where `і` is Cyrillic [U+0456](https://www.compart.com/en/unicode/U+0456), visually identical to the Latin `i`. Dolos detects the [IDN homograph attack](https://en.wikipedia.org/wiki/IDN_homograph_attack) via Unicode normalization.
+The link is wrapped in a Safe Links–style redirect, but the real destination is `http://mіcrosoft-account-verify.com` — where `і` is Cyrillic [U+0456](https://www.compart.com/en/unicode/U+0456), visually identical to the Latin `i`. Dolos extracts the embedded URL from the `?url=` parameter and detects the [IDN homograph attack](https://en.wikipedia.org/wiki/IDN_homograph_attack) via Cyrillic homoglyph mapping. The destination domain does not resolve, which adds an `UNREACHABLE_URL` signal.
 
 ![hard](docs/hard.png)
 
