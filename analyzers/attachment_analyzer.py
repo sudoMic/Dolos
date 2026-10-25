@@ -216,18 +216,6 @@ def _collect_anomalies(result: dict) -> list:
 
     return anomalies
     
-    # URL extraction from PDF
-    if result["declared_extension"] == ".pdf":
-        pdf_urls = _extract_pdf_urls(payload, filename)
-        if pdf_urls:
-            result["pdf_urls"] = pdf_urls
-            anomalies.append({
-                "type": "PDF_EMBEDDED_URLS",
-                "description": f"URL embedded in PDF: {', '.join(pdf_urls[:3])}",
-                "severity": "medium",
-                "score": 20,
-            })
-        
         
 def _check_pdf(payload: bytes, filename: str) -> dict:
     import io
