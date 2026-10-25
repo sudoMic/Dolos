@@ -225,7 +225,7 @@ def _collect_anomalies(resolved_urls: list, keyword_results: dict) -> list:
                 "type": "SUSPICIOUS_DOMAIN",
                 "description": f"Suspicious domain pattern: {original_domain}",
                 "severity": "high",
-                "score": 25,
+                "score": 10,
             })
             
         # Unreachable URL (connection error during resolution)

@@ -22,7 +22,11 @@ def compute_score(header_analysis, body_analysis, attachment_analysis, enrichmen
     # Apply weights from config if present, otherwise use the hardcoded value in the anomaly
     for anomaly in all_anomalies:
         atype = anomaly.get("type")
-        if atype in score_map:
+        if atype == "PHISHING_KEYWORDS":
+            # keep per-keyword sum, capped (keywords alone are a weak signal)
+            cap = score_map.get("PHISHING_KEYWORDS_MAX", 25)
+            anomaly["score"] = min(anomaly.get("score", 0), cap)
+        elif atype in score_map:
             anomaly["score"] = score_map[atype]
 
     raw_score = sum(a.get("score", 0) for a in all_anomalies)
