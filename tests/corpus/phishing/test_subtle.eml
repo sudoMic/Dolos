@@ -1,0 +1,21 @@
+From: "LinkedIn" <notifications@linkedin.com>
+To: mic@example.com
+Subject: You appeared in 3 searches this week
+Date: Thu, 12 Jun 2026 09:15:00 +0000
+Message-ID: <abc123@linkedin.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Received: from mail.linkedin.com ([108.174.10.10]) by mx.example.com; Thu, 12 Jun 2026 09:15:00 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=linkedin.com; dkim=pass header.d=linkedin.com; dmarc=pass
+Received-SPF: pass
+Reply-To: "LinkedIn Notifications" <no-reply@linkedln.com>
+
+<html>
+<body>
+<p>Hi Mic,</p>
+<p>Your profile appeared in 3 searches this week.</p>
+<a href="https://www.linkedin.com/notifications/">See who viewed your profile</a>
+<img src="https://static.licdn.com/sc/h/logo.png">
+<p>The LinkedIn Team</p>
+</body>
+</html>

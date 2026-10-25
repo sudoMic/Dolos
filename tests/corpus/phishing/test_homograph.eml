@@ -1,0 +1,12 @@
+From: "Amazon Security" <security@аmazon.com>
+To: victim@example.com
+Subject: Your account has been suspended
+Date: Thu, 12 Jun 2026 10:00:00 +0000
+Message-ID: <test@аmazon.com>
+MIME-Version: 1.0
+Content-Type: text/plain
+Received: from mail.аmazon.com ([185.220.101.45]) by mx.example.com; Thu, 12 Jun 2026 10:00:00 +0000
+Authentication-Results: mx.example.com; spf=pass; dkim=pass; dmarc=pass
+Received-SPF: pass
+
+Your account has been suspended. Click here to verify immediately.

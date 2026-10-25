@@ -1,0 +1,22 @@
+From: sender@example.com
+To: victim@example.com
+Subject: Documento allegato
+Date: Thu, 12 Jun 2026 10:00:00 +0000
+Message-ID: <test@example.com>
+MIME-Version: 1.0
+Received: from mail.example.com ([1.2.3.4]) by mx.example.com; Thu, 12 Jun 2026 10:00:00 +0000
+Content-Type: multipart/mixed; boundary="boundary123"
+
+--boundary123
+Content-Type: text/plain
+
+In allegato il documento richiesto.
+
+--boundary123
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="documento.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKMSAwIG9iaiA8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgL09wZW5BY3Rpb24gNCAwIFIgPj4gZW5kb2JqCjIgMCBvYmogPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4gZW5kb2JqCjMgMCBvYmogPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSA+PiBlbmRvYmoKNCAwIG9iaiA8PCAvVHlwZSAvQWN0aW9uIC9TIC9KYXZhU2NyaXB0IC9KUyAoYXBwLmFsZXJ0KCdwd25lZCcpOyB3aW5kb3cub3BlbignaHR0cDovL21hbGljaW91cy1wYXlsb2FkLnJ1L2Ryb3AnKTspID4+IGVuZG9iagp4cmVmCjAgNQowMDAwMDAwMDAwIDY1NTM1IGYKMDAwMDAwMDAwOSAwMDAwMCBuCjAwMDAwMDAwNTggMDAwMDAgbgowMDAwMDAwMTE1IDAwMDAwIG4KMDAwMDAwMDIwNiAwMDAwMCBuCnRyYWlsZXIgPDwgL1NpemUgNSAvUm9vdCAxIDAgUiA+PgpzdGFydHhyZWYKMzAwCiUlRU9G
+
+--boundary123--

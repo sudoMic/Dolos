@@ -1,0 +1,19 @@
+From: "Amazon Security Team" <noreply@amaz0n-notifications.com>
+To: victim@example.com
+Subject: Action Required: Unusual sign-in activity detected
+Date: Thu, 12 Jun 2026 08:23:11 +0000
+Message-ID: <abc987@amaz0n-notifications.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Received: from mail1.sendgrid.net ([167.89.123.45]) by mx.example.com; Thu, 12 Jun 2026 08:23:11 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=sendgrid.net; dkim=pass header.d=sendgrid.net; dmarc=pass
+Received-SPF: pass
+Reply-To: "Amazon Support" <support@amaz0n-notifications.com>
+
+<html><body>
+<p>We detected a sign-in to your Amazon account from a new device.</p>
+<p>Location: Bucharest, Romania</p>
+<p>If this wasn't you, secure your account immediately:</p>
+<a href="https://click.sendgrid.net/ls/click?upn=FAKETOKEN123&redirect=http://amaz0n-notifications.com/secure/signin">Secure My Account</a>
+<img src="https://images.amazon.com/logos/amazon-logo.png">
+</body></html>

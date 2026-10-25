@@ -1,0 +1,19 @@
+From: "GitHub" <noreply@github.com>
+To: mic@example.com
+Subject: Your weekly GitHub digest
+Date: Thu, 12 Jun 2026 08:00:00 +0000
+Message-ID: <digest123@github.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Received: from smtp.github.com ([192.30.252.1]) by mx.example.com; Thu, 12 Jun 2026 08:00:00 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=github.com; dkim=pass header.d=github.com; dmarc=pass
+Received-SPF: pass
+
+<html><body>
+<p>Hi mic,</p>
+<p>Here are your top repositories this week:</p>
+<a href="https://github.com/sudoMic/dolos">dolos</a>
+<a href="https://github.com/sudoMic/NexusCorp">NexusCorp</a>
+<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
+<p>The GitHub Team</p>
+</body></html>
